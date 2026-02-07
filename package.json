@@ -1,0 +1,18 @@
+{
+  "name": "econ6083-presentations",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ECON6083 Course Presentations powered by Marp",
+  "scripts": {
+    "build": "marp -I _slides/ -o public/ --html",
+    "start": "marp -s _slides/ --html",
+    "pdf": "marp -I _slides/ -o public/ --pdf",
+    "build:index": "node scripts/build-index.js"
+  },
+  "devDependencies": {
+    "@marp-team/marp-cli": "^4.0.0"
+  },
+  "keywords": ["marp", "presentations", "slides"],
+  "author": "",
+  "license": "MIT"
+}
