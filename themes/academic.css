@@ -5,7 +5,7 @@ section {
   font-family: 'Segoe UI', 'Liberation Sans', 'Palatino', 'Georgia', serif;
   font-size: 22px;
   padding: 60px 70px 50px 70px;
-  background: linear-gradient(to bottom, #ffffff 0%, #f8fafc 100%);
+  background: linear-gradient(135deg, #f8f9ff 0%, #faf5ff 100%);
   color: #1e293b;
   position: relative;
 }
@@ -24,26 +24,26 @@ section::after {
 }
 
 h1 {
-  color: #0f172a;
+  color: #667eea;
   font-weight: 700;
-  font-size: 2em;
-  margin-bottom: 0.5em;
-  border-bottom: 4px solid #3b82f6;
-  padding-bottom: 0.3em;
+  font-size: 1.6em;
+  margin-bottom: 0.6em;
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
 h2 {
-  color: #1e40af;
+  color: #764ba2;
   font-weight: 600;
-  font-size: 1.5em;
+  font-size: 1.3em;
   margin-top: 0.8em;
   margin-bottom: 0.6em;
 }
 
 h3 {
-  color: #3730a3;
+  color: #8b5cf6;
   font-weight: 600;
-  font-size: 1.2em;
+  font-size: 1.1em;
 }
 
 strong {
@@ -52,14 +52,14 @@ strong {
 }
 
 a {
-  color: #2563eb;
+  color: #667eea;
   text-decoration: none;
-  border-bottom: 1px solid #93c5fd;
+  border-bottom: 1px solid #c4b5fd;
 }
 
 a:hover {
-  color: #1d4ed8;
-  border-bottom-color: #2563eb;
+  color: #764ba2;
+  border-bottom-color: #667eea;
 }
 
 ul, ol {
@@ -84,8 +84,8 @@ section.lead {
 
 section.lead h1 {
   color: #ffffff;
-  border-bottom: 4px solid rgba(255,255,255,0.3);
-  font-size: 2.2em;
+  border-bottom: none;
+  font-size: 2em;
 }
 
 section.lead h2 {
@@ -119,8 +119,8 @@ section.cols h2 {
 
 /* 代码块样式 */
 code {
-  background: #e0e7ff;
-  color: #3730a3;
+  background: #ede9fe;
+  color: #7c3aed;
   padding: 2px 6px;
   border-radius: 4px;
   font-size: 0.85em;
@@ -149,7 +149,7 @@ table {
 }
 
 table th {
-  background: linear-gradient(to bottom, #3b82f6, #2563eb);
+  background: linear-gradient(135deg, #667eea, #764ba2);
   color: white;
   font-weight: 600;
   padding: 10px 16px;
@@ -166,12 +166,12 @@ table tr:nth-child(even) {
 }
 
 table tr:hover {
-  background: #eff6ff;
+  background: #f5f3ff;
 }
 
 /* 引用块 */
 blockquote {
-  border-left: 4px solid #3b82f6;
+  border-left: 4px solid #667eea;
   padding-left: 20px;
   margin: 20px 0;
   font-style: italic;
