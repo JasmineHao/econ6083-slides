@@ -512,9 +512,9 @@ $$(\hat{g} - g_0) \cdot (\hat{m} - m_0)$$
 
 ---
 
-## Cross-Fitting Algorithm
+## Cross-Fitting Algorithm (Part 1)
 
-**Steps**:
+**Steps 1-3**: Data Splitting and Training
 
 1. **Split**: Randomly partition sample into $K$ folds (e.g., $K=5$)
    - Let $I_k$ = fold $k$, $I_k^c$ = training complement
@@ -524,6 +524,12 @@ $$(\hat{g} - g_0) \cdot (\hat{m} - m_0)$$
    - $\hat{m}_k(X)$ predicting $D$ from $X$
 
 3. **Predict**: Apply models to held-out fold $I_k$
+
+---
+
+## Cross-Fitting Algorithm (Part 2)
+
+**Steps 4-5**: Residualization and Estimation
 
 4. **Residualize**: For each $i \in I_k$:
    - $\tilde{Y}_i = Y_i - \hat{g}_k(X_i)$
@@ -556,7 +562,7 @@ $$(\hat{g} - g_0) \cdot (\hat{m} - m_0)$$
 
 ---
 
-## Case Study: Merger Retrospectives
+## Case Study: Merger Retrospectives (Setup)
 
 **Context**: Estimating counterfactual price effects of mergers
 - Example: T-Mobile/Sprint, MillerCoors joint venture
@@ -572,7 +578,7 @@ $$(\hat{g} - g_0) \cdot (\hat{m} - m_0)$$
 
 ---
 
-## Merger Retrospectives (cont.)
+## Merger Retrospectives (Solution)
 
 **Traditional approach fails**:
 - OLS with market fixed effects: misses heterogeneity
@@ -672,15 +678,25 @@ $$(\hat{g} - g_0) \cdot (\hat{m} - m_0)$$
 
 ---
 
-## The Structural Model: Two-Stage Game
+## The Structural Model: Stage 1
 
-**Stage 1: Entry Game** (Discrete game of incomplete information)
+**Entry Game** (Discrete game of incomplete information)
+
 - Firms $j \in \{1, ..., J\}$ simultaneously decide entry
 - Profit function: $\pi_{jm} = f(X_m, \xi_m, \text{number of competitors})$
 - Enter if $\pi_{jm} > 0$
 - Equilibrium: Bayesian Nash
 
-**Stage 2: Pricing Game** (Conditional on entry)
+**Key feature**: Strategic interaction
+- Firm's entry depends on expected rivals' actions
+- Multiple equilibria possible
+
+---
+
+## The Structural Model: Stage 2
+
+**Pricing Game** (Conditional on entry)
+
 - Active firms observe realized market structure
 - Set prices via Nash-Bertrand equilibrium
 - Consumer demand: BLP-style logit with unobserved quality $\xi_{jm}$
@@ -692,7 +708,7 @@ $$(\hat{g} - g_0) \cdot (\hat{m} - m_0)$$
 
 ---
 
-## The Solution: Finite Mixture Model
+## The Solution: Finite Mixture Model (Step 1)
 
 **Innovation**: Two-Step Mixture Model approach
 
@@ -710,7 +726,9 @@ $$(\hat{g} - g_0) \cdot (\hat{m} - m_0)$$
 
 ---
 
-## Step 2: Demand Estimation with Type Controls
+## The Solution: Finite Mixture Model (Step 2)
+
+**Step 2: Demand Estimation with Type Controls**
 
 **Control function approach**:
 - Instead of single inverse Mill's ratio
@@ -1047,5 +1065,5 @@ $$\text{Control} = \sum_{t=1}^{T^*} w_t \cdot P(T_m = t | X_m, \text{realized st
 
 # Thank You!
 
-**Contact**: [Your email]
-**Course materials**: [Website]
+**Contact**: haoyu@hku.hk
+**Course materials**: [Website](https://jasminehao.com/econ6083-slides/)

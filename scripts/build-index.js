@@ -314,6 +314,9 @@ const html = `<!DOCTYPE html>
 
     <footer>
       <p>
+        <strong>Contact:</strong> <a href="mailto:haoyu@hku.hk">haoyu@hku.hk</a><br>
+        <strong>Course Materials:</strong> <a href="https://jasminehao.com/econ6083-slides/" target="_blank">Website</a><br>
+        <br>
         <strong>Course Slides</strong> powered by <a href="https://marp.app/" target="_blank">Marp</a><br>
         ECON6083 | 2026 Spring | The University of Hong Kong
       </p>
