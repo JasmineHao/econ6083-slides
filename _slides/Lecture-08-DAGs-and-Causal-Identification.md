@@ -3,7 +3,6 @@ marp: true
 theme: academic
 paginate: true
 math: mathjax
-footer: 'ECON6083 Lecture 8 | Structural Causal Models & Applied Identification'
 ---
 
 <!-- _class: lead -->

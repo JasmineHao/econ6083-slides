@@ -12,7 +12,7 @@ section {
 
 section::after {
   font-size: 11px;
-  color: #64748b;
+  color: #a78bfa;
   position: absolute;
   right: 40px;
   bottom: 30px;
@@ -178,17 +178,9 @@ blockquote {
   color: #475569;
 }
 
-/* 页脚样式 */
+/* 页脚样式 - 隐藏水印 */
 footer {
-  font-size: 12px;
-  color: #888;
-  position: absolute;
-  left: 40px;
-  bottom: 30px;
-  max-width: calc(100% - 280px);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  display: none;
 }
 
 /* 数学公式间距 */
