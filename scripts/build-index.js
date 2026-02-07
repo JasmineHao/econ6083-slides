@@ -22,7 +22,7 @@ const html = `<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ECON6083 机器学习在经济学中的应用 | 课程讲义</title>
+  <title>ECON6083 Machine Learning in Economics | Course Slides</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -276,20 +276,20 @@ const html = `<!DOCTYPE html>
   <div class="container">
     <header>
       <div class="hero">
-        <h1>机器学习在经济学中的应用</h1>
-        <p class="subtitle">Machine Learning in Economics</p>
+        <h1>Machine Learning in Economics</h1>
+        <p class="subtitle">Faculty of Business and Economics</p>
         <div class="stats">
           <div class="stat-item">
             <div class="stat-number">${presentations.length}</div>
-            <div class="stat-label">讲次 Lectures</div>
+            <div class="stat-label">Lectures</div>
           </div>
           <div class="stat-item">
             <div class="stat-number">11</div>
-            <div class="stat-label">周 Weeks</div>
+            <div class="stat-label">Weeks</div>
           </div>
           <div class="stat-item">
             <div class="stat-number">33</div>
-            <div class="stat-label">学时 Hours</div>
+            <div class="stat-label">Hours</div>
           </div>
         </div>
         <span class="course-code">ECON6083</span>
@@ -300,7 +300,7 @@ const html = `<!DOCTYPE html>
       ${presentations.map((p, index) => {
         const lectureNum = p.filename.match(/Lecture-(\d+)/i)?.[1] || (index + 1);
         return `<a href="${p.htmlName}" class="lecture-card" style="animation-delay: ${index * 0.1}s">
-        <div class="lecture-number">第 ${lectureNum} 讲</div>
+        <div class="lecture-number">Lecture ${lectureNum}</div>
         <div class="lecture-content">
           <div class="lecture-title">${p.title}</div>
           <div class="lecture-meta">
@@ -314,8 +314,8 @@ const html = `<!DOCTYPE html>
 
     <footer>
       <p>
-        <strong>课程讲义</strong> 由 <a href="https://marp.app/" target="_blank">Marp</a> 强力驱动<br>
-        ECON6083 | 2026 Spring | 中国人民大学经济学院
+        <strong>Course Slides</strong> powered by <a href="https://marp.app/" target="_blank">Marp</a><br>
+        ECON6083 | 2026 Spring | The University of Hong Kong
       </p>
     </footer>
   </div>

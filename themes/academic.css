@@ -4,14 +4,23 @@
 section {
   font-family: 'Segoe UI', 'Liberation Sans', 'Palatino', 'Georgia', serif;
   font-size: 22px;
-  padding: 70px 80px;
+  padding: 60px 70px 50px 70px;
   background: linear-gradient(to bottom, #ffffff 0%, #f8fafc 100%);
   color: #1e293b;
+  position: relative;
 }
 
 section::after {
-  font-size: 12px;
+  font-size: 11px;
   color: #64748b;
+  position: absolute;
+  right: 40px;
+  bottom: 30px;
+  text-align: right;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 h1 {
@@ -171,8 +180,15 @@ blockquote {
 
 /* 页脚样式 */
 footer {
-  font-size: 14px;
+  font-size: 12px;
   color: #888;
+  position: absolute;
+  left: 40px;
+  bottom: 30px;
+  max-width: calc(100% - 280px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* 数学公式间距 */
