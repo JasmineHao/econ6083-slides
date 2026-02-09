@@ -4,10 +4,10 @@
   "private": true,
   "description": "ECON6083 Course Presentations powered by Marp",
   "scripts": {
-    "build": "marp -I _slides/ -o public/ --html && node scripts/copy-images.js",
+    "build": "marp -I _slides/ -o public/ --html && node scripts/copy-images.js && node scripts/copy-resources.js",
     "start": "marp -s _slides/ --html",
     "pdf": "marp -I _slides/ -o public/ --pdf",
-    "build:index": "node scripts/build-index.js"
+    "build:index": "node scripts/build-index.js && node scripts/copy-resources.js"
   },
   "devDependencies": {
     "@marp-team/marp-cli": "^4.0.0"
