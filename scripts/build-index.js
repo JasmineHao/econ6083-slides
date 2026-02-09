@@ -13,8 +13,16 @@ const presentations = files.map(f => {
   const titleMatch = content.match(/^#\s+(.+)$/m);
   const title = titleMatch ? titleMatch[1] : f.replace('.md', '');
   const htmlName = f.replace('.md', '.html');
-  return { title, htmlName, filename: f };
+
+  // Extract lecture number from filename
+  const numMatch = f.match(/Lecture[- ]?(\d+)/i);
+  const lectureNum = numMatch ? parseInt(numMatch[1], 10) : 999;
+
+  return { title, htmlName, filename: f, lectureNum };
 });
+
+// Sort by lecture number
+presentations.sort((a, b) => a.lectureNum - b.lectureNum);
 
 // 生成 index.html
 const html = `<!DOCTYPE html>
@@ -91,92 +99,72 @@ const html = `<!DOCTYPE html>
       letter-spacing: 1px;
     }
 
-    .lectures-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 24px;
-      margin-bottom: 60px;
-    }
-
-    .lecture-card {
+    .lectures-list {
       background: rgba(255, 255, 255, 0.95);
       border-radius: 16px;
-      overflow: hidden;
+      padding: 40px;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      animation: fadeInUp 0.6s ease-out backwards;
+      margin-bottom: 40px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .lectures-list ol {
+      list-style: none;
+      counter-reset: lecture-counter;
+      padding: 0;
+      margin: 0;
+    }
+
+    .lecture-item {
+      counter-increment: lecture-counter;
+      margin-bottom: 16px;
+      padding: 20px;
+      border-radius: 12px;
+      background: #f8fafc;
+      transition: all 0.3s ease;
+      border-left: 4px solid transparent;
+    }
+
+    .lecture-item:hover {
+      background: #edf2f7;
+      border-left-color: #667eea;
+      transform: translateX(4px);
+    }
+
+    .lecture-item a {
+      display: flex;
+      align-items: center;
       text-decoration: none;
       color: inherit;
-      display: block;
-      position: relative;
-    }
-
-    .lecture-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 6px;
-      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s ease;
-    }
-
-    .lecture-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .lecture-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 16px 40px rgba(102, 126, 234, 0.4);
+      gap: 20px;
     }
 
     .lecture-number {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      padding: 16px 24px;
-      font-weight: 700;
-      font-size: 0.85em;
-      letter-spacing: 0.5px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      justify-content: center;
+      min-width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      font-weight: 700;
+      font-size: 1.2em;
+      flex-shrink: 0;
     }
 
     .lecture-number::before {
-      content: '📚';
-      font-size: 1.2em;
-    }
-
-    .lecture-content {
-      padding: 24px;
+      content: counter(lecture-counter, decimal-leading-zero);
     }
 
     .lecture-title {
-      font-size: 1.3em;
-      font-weight: 600;
-      color: #2d3748;
-      line-height: 1.4;
-      margin-bottom: 12px;
-    }
-
-    .lecture-meta {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 16px;
-    }
-
-    .meta-tag {
-      background: #edf2f7;
-      color: #4a5568;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 0.75em;
+      flex: 1;
+      font-size: 1.1em;
       font-weight: 500;
-      font-family: 'JetBrains Mono', monospace;
+      color: #2d3748;
+      line-height: 1.5;
     }
 
     footer {
@@ -261,8 +249,22 @@ const html = `<!DOCTYPE html>
         padding: 40px 24px;
       }
 
-      .lectures-grid {
-        grid-template-columns: 1fr;
+      .lectures-list {
+        padding: 20px;
+      }
+
+      .lecture-item a {
+        gap: 12px;
+      }
+
+      .lecture-number {
+        min-width: 40px;
+        height: 40px;
+        font-size: 1em;
+      }
+
+      .lecture-title {
+        font-size: 0.95em;
       }
 
       .stats {
@@ -296,20 +298,15 @@ const html = `<!DOCTYPE html>
       </div>
     </header>
 
-    <div class="lectures-grid">
-      ${presentations.map((p, index) => {
-        const lectureNum = p.filename.match(/Lecture-(\d+)/i)?.[1] || (index + 1);
-        return `<a href="${p.htmlName}" class="lecture-card" style="animation-delay: ${index * 0.1}s">
-        <div class="lecture-number">Lecture ${lectureNum}</div>
-        <div class="lecture-content">
-          <div class="lecture-title">${p.title}</div>
-          <div class="lecture-meta">
-            <span class="meta-tag">HTML</span>
-            <span class="meta-tag">Slides</span>
-          </div>
-        </div>
-      </a>`;
-      }).join('\n      ')}
+    <div class="lectures-list">
+      <ol>
+        ${presentations.map((p, index) => `<li class="lecture-item">
+          <a href="${p.htmlName}">
+            <div class="lecture-number"></div>
+            <div class="lecture-title">${p.title}</div>
+          </a>
+        </li>`).join('\n        ')}
+      </ol>
     </div>
 
     <footer>
