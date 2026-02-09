@@ -456,7 +456,7 @@ const html = `<!DOCTYPE html>
           const ex = resources.inClassExercise;
           resourcesHTML += `
             <div class="resource-item">
-              <a href="${exercisesDir}/${ex.file}" class="resource-link" target="_blank">
+              <a href="${exercisesDir}/${ex.file.replace('.md', '.html')}" class="resource-link" target="_blank">
                 <div class="resource-title">
                   <span class="badge badge-exercise">In-Class</span>
                   ${ex.title}
@@ -474,7 +474,7 @@ const html = `<!DOCTYPE html>
             if (assignment) {
               resourcesHTML += `
                 <div class="resource-item">
-                  <a href="${assignmentsDir}/${assignmentKey}/README.md" class="resource-link" target="_blank">
+                  <a href="${assignmentsDir}/${assignmentKey}/index.html" class="resource-link" target="_blank">
                     <div class="resource-title">
                       <span class="badge badge-assignment">Assignment</span>
                       ${assignment.title}
