@@ -286,11 +286,11 @@ const html = `<!DOCTYPE html>
             <div class="stat-label">Lectures</div>
           </div>
           <div class="stat-item">
-            <div class="stat-number">11</div>
+            <div class="stat-number">${presentations.length}</div>
             <div class="stat-label">Weeks</div>
           </div>
           <div class="stat-item">
-            <div class="stat-number">33</div>
+            <div class="stat-number">${presentations.length * 3}</div>
             <div class="stat-label">Hours</div>
           </div>
         </div>
