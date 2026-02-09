@@ -42,7 +42,7 @@ presentations.sort((a, b) => a.lectureNum - b.lectureNum);
 // 定义每个lecture对应的练习和作业
 const lectureResources = {
   1: {
-    assignments: []
+    assignments: ['A0']  // A0 在 Lecture 1 发布
   },
   2: {
     inClassExercise: {
