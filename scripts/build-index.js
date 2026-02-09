@@ -12,8 +12,21 @@ const files = fs.readdirSync(slidesDir).filter(f => f.endsWith('.md') && f !== '
 // 提取每个文件的标题
 const presentations = files.map(f => {
   const content = fs.readFileSync(path.join(slidesDir, f), 'utf-8');
-  const titleMatch = content.match(/^#\s+(.+)$/m);
-  const title = titleMatch ? titleMatch[1] : f.replace('.md', '');
+
+  // Extract both h1 (Lecture X) and h2 (subtitle) from first slide
+  const h1Match = content.match(/^#\s+(.+)$/m);
+  const h2Match = content.match(/^##\s+(.+)$/m);
+
+  let title;
+  if (h1Match && h2Match) {
+    // Combine: "Lecture 1: Course Introduction & Supervised Learning"
+    title = `${h1Match[1]}: ${h2Match[1]}`;
+  } else if (h1Match) {
+    title = h1Match[1];
+  } else {
+    title = f.replace('.md', '');
+  }
+
   const htmlName = f.replace('.md', '.html');
 
   // Extract lecture number from filename
