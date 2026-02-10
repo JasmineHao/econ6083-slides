@@ -84,3 +84,103 @@ Hint: The formula for the individual score $\psi_i$ is:
 $$\psi_i = (\hat{\mu}_1 - \hat{\mu}_0) + \frac{D(Y - \hat{\mu}_1)}{\hat{e}} - \frac{(1-D)(Y - \hat{\mu}_0)}{1-\hat{e}}$$
 
 $$\hat{\tau}_{DR} = \frac{1}{N} \sum \psi_i$$
+
+---
+
+Part IV: Practical Coding Exercise (Optional, 10 minutes)
+
+Q8. Implementing Cross-Validation in Python
+
+You have been given the following credit scoring dataset and need to tune the max_depth hyperparameter for a Decision Tree.
+
+```python
+from sklearn.datasets import make_classification
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split, cross_val_score, GridSearchCV
+import numpy as np
+
+# Generate credit scoring data
+X, y = make_classification(n_samples=1000, n_features=10,
+                          n_informative=8, n_redundant=2,
+                          n_classes=2, random_state=42)
+
+# Hold out a test set
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+```
+
+Task A: Manual Cross-Validation
+
+Complete the code to manually implement 5-fold cross-validation for different max_depth values:
+
+```python
+from sklearn.model_selection import KFold
+
+depths = [1, 3, 5, 10, 15]
+cv_scores = {}
+
+kfold = KFold(n_splits=5, shuffle=True, random_state=42)
+
+for depth in depths:
+    # TODO: Create a DecisionTreeClassifier with max_depth=depth
+    clf = _______________
+
+    # TODO: Use cross_val_score to get 5 accuracy scores
+    scores = _______________
+
+    # Store mean and std
+    cv_scores[depth] = {
+        'mean': scores.mean(),
+        'std': scores.std()
+    }
+
+# Print results
+for depth, score in cv_scores.items():
+    print(f"Depth={depth}: {score['mean']:.3f} (+/- {score['std']:.3f})")
+```
+
+Task B: Using GridSearchCV
+
+Now do the same using GridSearchCV (the automatic way):
+
+```python
+# TODO: Define parameter grid
+param_grid = {'max_depth': [1, 3, 5, 10, 15]}
+
+# TODO: Create GridSearchCV object
+grid_search = GridSearchCV(
+    estimator=_______________,
+    param_grid=_______________,
+    cv=5,
+    scoring='accuracy',
+    return_train_score=True
+)
+
+# TODO: Fit the grid search
+grid_search.fit(_______________, _______________)
+
+# Print best parameters and score
+print(f"\nBest max_depth: {grid_search.best_params_['max_depth']}")
+print(f"Best CV score: {grid_search.best_score_:.3f}")
+
+# TODO: Evaluate on test set using best model
+test_score = _______________
+print(f"Test set score: {test_score:.3f}")
+```
+
+Task C: Discussion Questions
+
+1. Compare the manual CV and GridSearchCV approaches:
+   - Which is easier to implement?
+   - Which gives you more control?
+   - When would you use each?
+
+2. Look at your results:
+   - Which max_depth was selected?
+   - Is there evidence of overfitting? (Compare CV score to test score)
+   - What happens if you increase max_depth to 20 or 30?
+
+3. Critical Thinking:
+   - You used the SAME data to select max_depth (via CV) and then evaluate on the test set. Is this truly unbiased?
+   - How could you implement a more rigorous validation strategy? (Hint: nested CV or train/val/test split)
